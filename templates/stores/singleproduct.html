@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load humanize%}
+{% block content %}
+
+<section id="product" class="py-5 my-5">
+    <div class="container">
+        <!-- breadcrumb -->
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'category' %}">product</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{show.title}}</li>
+          </ol>
+        </nav>
+        <hr>
+        <!-- single product -->
+
+        <div class="row">
+            {% if show %}
+          <div class="col-12 col-md-6">
+            <img src="{{ show.image.url }}" class="img-fluid" alt="{{show.title}}">
+          </div>
+          <div class="col-12 col-md-6">
+            <h3>{{show.title}}</h3>
+            <span>Views <i class="bi bi-eye"></i> : {{show.view_count}}</span>
+            <hr>
+            <p class="lead my-3"> <span class="text-danger">Warranty:</span>{{show.warranty}}</p>
+            <p class="lead my-3"> <span class="text-danger">Return policy:</span>{{show.Return_policy}}</p>
+            {%if show.discount_price %}
+            <h3>&#8358; {{show.discount_price| intcomma}} <del>&#8358; {{if show.discount_price | intcomma}}</del></h3>
+            {% else %}
+            <h3>&#8358;{{show.discount_price| intcomma}} </h3>
+            {% endif %}
+            <p class="lead my-3">
+              {{show.description}}
+              Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer enim purus, posuere at ultricies eu, placerat a felis. Suspendisse aliquet urna pretium eros convallis interdum. Quisque in arcu id dui vulputate mollis eget non arcu. Aenean et nulla purus. Mauris vel tellus non nunc mattis lobortis.
+            </p>
+          </div>
+          {% else %}
+          <div class="d-grid">
+              <a href="" class="bt btn-dark"> Add to cart</a>
+          </div>
+          {% endif %}
+        </div>
+    </div>
+  </section>
+
+
+
+
+
+
+  
+{% endblock content %}
